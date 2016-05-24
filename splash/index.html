@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Splash Screen</title>
+</head>
+<body>
+<h1>Hello</h1>
+<script>
+
+    var net = require('net');
+
+    var server = net.createServer(function(socket) {
+        socket.write('Echo server\r\n');
+        socket.pipe(socket);
+
+        // Handle incoming messages from clients.
+        socket.on('data', function (data) {
+            console.log(data.toString());
+            if(data.toString() === 'loaded') {
+                server.close();
+                var gui = require('nw.gui');         // Get the current window
+                var win = gui.Window.get();
+                win.close(true);
+            }
+        });
+    });
+
+    server.listen(1337, '127.0.0.1');
+
+    const execFile = require('child_process').exec;
+    const child = execFile('nw mac-x64/NWSample.app/Contents/Resources/app.nw', function(error, stdout, stderr) {
+            if (error) {
+                throw error;
+            }
+            console.log("hi "+stdout);
+    });
+
+</script>
+</body>
+</html>

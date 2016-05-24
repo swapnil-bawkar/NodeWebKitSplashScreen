@@ -1,0 +1,24 @@
+{
+  "name": "lunchapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "sudo nw"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nw": "^0.12.3"
+  },
+  "window": {
+    "icon": "icon.png",
+    "show": true,
+    "toolbar": true,
+    "width": 1110,
+    "height": 830,
+    "min_width": 1110,
+    "min_height": 830,
+    "position": "center"
+  }
+}

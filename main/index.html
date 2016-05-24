@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Application</title>
+</head>
+<body>
+    <h1>Hello World</h1>
+    <script>
+        var net = require('net');
+
+        var client = new net.Socket();
+        client.connect(1337, '127.0.0.1', function() {
+            console.log('Connected');
+            client.write('Hello, server! Love, Client.');
+        });
+
+        client.on('data', function(data) {
+            console.log('Received: ' + data);
+        });
+
+        client.on('close', function() {
+            console.log('Connection closed');
+        });
+        // Load native UI library
+        var gui = require('nw.gui');         // Get the current window
+        var win = gui.Window.get();
+        // Listen to the minimize event
+        win.on('loaded', function() {
+            client.write("loaded");
+            win.show();
+            console.log('Window is loaded');
+        });
+
+
+    </script>
+</body>
+</html>
